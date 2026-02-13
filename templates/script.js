@@ -49,7 +49,7 @@ function furryMatch(str, query) {
     if (!query.length) {
         return undefined;
     }
-    
+
     let score = 0;
     let matchedString = '';
     let toMatch = 0;
@@ -248,3 +248,23 @@ window.onpopstate = e => {
         feather.replace();
     }
 };
+
+document.querySelectorAll('[data-pick-theme]').forEach(btn => {
+    btn.addEventListener('click', e => {
+        pickTheme(btn.getAttribute('data-pick-theme'));
+        // deselect other buttons
+        btn.parentElement.querySelectorAll('.selected')
+            .forEach(b => b.classList.remove('selected'));
+        // select this one
+        btn.classList.add('selected');
+    });
+});
+
+function pickTheme(name) {
+    for (const cls of document.body.classList) {
+        if (cls.startsWith('flash-theme-')) {
+            document.body.classList.remove(cls);
+        }
+    }
+    document.body.classList.add(`flash-theme-${name}`);
+}
