@@ -31,11 +31,11 @@ function search(query) {
 
 function getFullName(node) {
     let parent = node;
-    const result = [node.innerText.trim()];
+    const result = [node.textContent.trim()];
     while (parent.parentElement) {
         parent = parent.parentElement;
         if (parent.tagName === 'DETAILS') {
-            result.splice(0, 0, parent.querySelector('summary').innerText.trim());
+            result.splice(0, 0, parent.querySelector('summary').textContent.trim());
         }
     }
     return result;
@@ -49,7 +49,7 @@ function furryMatch(str, query) {
     if (!query.length) {
         return undefined;
     }
-
+    
     let score = 0;
     let matchedString = '';
     let toMatch = 0;
